@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Lovable Dev Prompt Extension",
+  "version": "1.0",
+  "description": "Processes prompts on Lovable.dev and interacts with specified AI tool workspaces.",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://lovable-model-comparison.lovable.app/*"],
+      "js": ["webapp_content_script.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://lovable.dev/*"],
+      "js": ["lovable_content_script.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
